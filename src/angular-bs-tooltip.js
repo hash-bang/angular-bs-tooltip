@@ -18,7 +18,7 @@ angular.module('angular-bs-tooltip', [])
 					.tooltip({
 						title: $scope.tooltip,
 						placement: $scope.tooltipPosition || 'top',
-						container: $scope.tooltipContainer || null,
+						container: $scope.tooltipContainer == 'element' ? false : 'body',
 						trigger: $scope.tooltipTrigger || 'hover',
 						html: $scope.tooltipHtml || false,
 						animation: false

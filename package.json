@@ -1,6 +1,6 @@
 {
   "name": "@momsfriendlydevco/angular-bs-tooltip",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "AngularJS + Bootstrap tooltip support",
   "main": "angular-bs-tooltip.js",
   "scripts": {
@@ -37,5 +37,8 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.1.2",
     "jquery": "^3.2.1"
+  },
+  "optionalDependencies": {
+    "tether": "^1.4.0"
   }
 }

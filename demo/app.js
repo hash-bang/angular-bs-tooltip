@@ -9,7 +9,9 @@ angular.module('app', [
 			text: 'Hello <strong>World</strong>!',
 			position: 'top',
 			html: false,
+			tether: false,
 			show: false,
+			jumpy: false,
 		};
 		$scope.positions = [
 			{id: 'top', text: 'Top'},
@@ -17,4 +19,18 @@ angular.module('app', [
 			{id: 'bottom', text: 'Bottom'},
 			{id: 'left', text: 'Left'},
 		];
+
+		// .config.jumpy {{{
+		$scope.jumpTimer;
+		$scope.$watch('config.jumpy', ()=> {
+			if (!$scope.config.jumpy) return $interval.cancel($scope.jumpTimer);
+
+			$scope.jumpTimer = $interval(()=> $('#target').css({
+				top: (Math.random() * 100) / 2,
+				left: (Math.random() * 100) / 2,
+			}), 700);
+		});
+
+		$scope.jumpRefresh = ()=> $scope.$broadcast('bs.tooltip.reposition');
+		// }}}
 	})

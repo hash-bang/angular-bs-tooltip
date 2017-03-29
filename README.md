@@ -37,8 +37,13 @@ var app = angular.module('app', ['angular-bs-tooltip'])
 A demo is also available. To use this [follow the instructions in the demo directory](./demo/README.md).
 
 
+API
+===
+
 Options
-=======
+-------
+The following options can be applied to any element to configure tooltips.
+
 
 | Option              | Type      | Default | Description                                                                  |
 |---------------------|-----------|---------|------------------------------------------------------------------------------|
@@ -48,3 +53,15 @@ Options
 | `tooltip-trigger`   | `string`  | `hover` | When to display the tooltip. Values are: `hover`, `focus`, `click`, `manual` |
 | `tooltip-html`      | `boolean` | `false` | Whether to render the contents as HTML. If false, plain text is used         |
 | `tooltip-show`      | `boolean` | `false` | Force the tooltip to display (this overrides `tooltip-trigger` if truthy)    |
+| `tooltip-tether`    | `boolean` OR `number` | `false` | Use [Tether](http://tether.io) to dynamically pin the element. Use this (and include Tether in the project) if your underlying element changes position frequently. This setting is the time interval Tether should check for repositions (a value of `true` = `100`). NOTE: If you are just refreshing positions periodically use the `$scope.$broadcast('bs.tooltip.reposition')` instead |
+
+
+Events
+------
+This directive also responds to the following broadcast events from the scope.
+To use these simply broadcast from the parent scope *downwards* using `$broadcast()`. For example `$scope.$broadcast('bs.tooltip.reposition')` will force all tooltips below the calling controller to reposition themselves.
+
+
+| Event                   | Description |
+|-------------------------|-------------|
+| `bs.tooltip.reposition` | Reposition all tooltips to their parent element if they are visible. If `tooltip-tether` is enabled on any tooltip it will be used for positioning, if not the tooltip is repositioned by Bootstrap |

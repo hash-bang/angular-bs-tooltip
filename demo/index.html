@@ -28,9 +28,15 @@
 
 	<!-- Angular-BS-Tooltip module -->
 	<script src="/angular-bs-tooltip.js"></script>
+	<script src="/node_modules/tether/dist/js/tether.min.js"></script>
 
 	<style>
 	.p-t-20 {padding-top: 20px}
+
+	/* Make target smoothly jump around */
+	#target {
+		transition: left .5s ease, top .5s ease;
+	}
 	</style>
 </head>
 <body ng-app="app" ng-controller="demoCtrl">
@@ -76,9 +82,24 @@
 						</select>
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Tethering</label>
+					<div class="col-sm-9">
+						<div class="checkbox">
+							<label><input ng-model="config.tether" type="checkbox"> Tether</label>
+						</div>
+						<div class="checkbox">
+							<label><input ng-model="config.jumpy" type="checkbox"> Jump around</label>
+						</div>
+						<div class="checkbox">
+							<a ng-click="jumpRefresh()" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i> Manual reposition</a>
+						</div>
+					</div>
+				</div>
+
 			</div>
-			<div class="col-md-4 text-center">
-				<a class="btn btn-primary" tooltip="{{config.text}}" tooltip-position="{{config.position}}" tooltip-html="config.html" tooltip-show="config.show">Button</a>
+			<div class="col-md-4 text-center well" style="height: 200px">
+				<a id="target" style="position: relative" class="btn btn-primary" tooltip="{{config.text}}" tooltip-position="{{config.position}}" tooltip-html="config.html" tooltip-show="config.show" tooltip-tether="config.tether">Button</a>
 			</div>
 		</div>
 	</div>

@@ -69,16 +69,26 @@
 						<div class="checkbox">
 							<label><input ng-model="config.html" type="checkbox"> Allow HTML</label>
 						</div>
-						<div class="checkbox">
-							<label><input ng-model="config.show" type="checkbox"> Force show</label>
-						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">Text</label>
 					<div class="col-sm-9">
 						<select ng-model="config.position" class="form-control">
-							<option ng-repeat="position in positions track by position.id" value="{{position.id}}">{{position.text}}</option>
+							<option ng-value="'top'">Top</option>
+							<option ng-value="'right'">Right</option>
+							<option ng-value="'bottom'">Bottom</option>
+							<option ng-value="'left'">Left</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Visibility</label>
+					<div class="col-sm-9">
+						<select ng-model="config.show" class="form-control">
+							<option ng-value="undefined">Default</option>
+							<option ng-value="true">Force Show</option>
+							<option ng-value="false">Force Hide</option>
 						</select>
 					</div>
 				</div>
@@ -96,7 +106,6 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 			<div class="col-md-4 text-center well" style="height: 200px">
 				<a id="target" style="position: relative" class="btn btn-primary" tooltip="{{config.text}}" tooltip-position="{{config.position}}" tooltip-html="config.html" tooltip-show="config.show" tooltip-tether="config.tether">Button</a>

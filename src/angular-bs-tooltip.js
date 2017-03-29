@@ -13,17 +13,13 @@ angular.module('angular-bs-tooltip', [])
 	controller: function($scope, $element, $interval) {
 		$scope.isVisible = false;
 
-		$scope.destroy = ()=> {
-			var elem = $($element);
-			if (elem.hasClass('ng-tooltip')) elem.tooltip('destroy');
-		};
-
 		/**
 		* Rebuild the tooltip
 		*/
 		$scope.rebuild = ()=> {
 			var elem = $($element);
-			var isVisible = ($scope.tooltipShow !== undefined && $scope.tooltipShow !== null) ? $scope.tooltipShow : $scope.isVisible; // Local copy of the tooltip before we destroy it (or forced with tooltipShow)
+			var isVisible = $scope.isVisible; // Local copy of the tooltip before we destroy it (or forced with tooltipShow)
+			if (elem.hasClass('ng-tooltip')) elem.tooltip('destroy');
 
 			$scope.rebuildTether();
 
@@ -34,31 +30,17 @@ angular.module('angular-bs-tooltip', [])
 					title: $scope.tooltip,
 					placement: $scope.tooltipPosition || 'top',
 					container: $scope.tooltipContainer == 'element' ? false : 'body',
-					trigger: $scope.tooltipShow ? 'manual' : $scope.tooltipTrigger || 'hover',
+					trigger: ($scope.tooltipShow === true || $scope.tooltipShow === false) ? 'manual' : $scope.tooltipTrigger || 'hover',
 					html: !! $scope.tooltipHtml,
 					animation: false,
 				})
 				.addClass('ng-tooltip');
 
-			if (isVisible) elem.tooltip('show'); // Reshow the tooltip if we WERE using it before
+			if (
+				$scope.tooltipShow === true ||
+				($scope.tooltipShow !== false && isVisible)
+			) elem.tooltip('show'); // Reshow the tooltip if we WERE using it before AND we dont have a forced hide
 		};
-
-		// Setup a watcher to rebuild if any visual properties change
-		$scope.$watchGroup(['tooltip', 'tooltipPosition', 'tooltipContainer', 'tooltipTrigger', 'tooltipHtml', 'tooltipShow', 'tooltipTether'], ()=> {
-			$scope.destroy();
-			$scope.rebuild();
-		});
-
-		// Respond to upstream events {{{
-		$scope.$on('bs.tooltip.reposition', ()=> {
-			if ($scope.tether) { // Using Tether - ask it to reposition
-				$scope.tether.position();
-			} else { // Not using tether - destroy and rebuild
-				$scope.destroy();
-				$scope.rebuild();
-			}
-		});
-		// }}}
 
 		// Tethering {{{
 		$scope.tether; // Tether object if we're using Tether mode
@@ -68,7 +50,6 @@ angular.module('angular-bs-tooltip', [])
 			if ($scope.tooltipTether) { // Try to tether this tooltip
 				var elem = $($element)
 
-				console.log('QUEUE ATTACH');
 				elem.one('shown.bs.tooltip', ()=> { // Wait until the tooltip is visible then tether to it
 					console.log('Shown!');
 					$scope.tether = new Tether({
@@ -98,6 +79,19 @@ angular.module('angular-bs-tooltip', [])
 				$interval.cancel($scope.tetherTimer);
 			}
 		};
+		// }}}
+
+		// Setup a watcher to rebuild if any visual properties change
+		$scope.$watchGroup(['tooltip', 'tooltipPosition', 'tooltipContainer', 'tooltipTrigger', 'tooltipHtml', 'tooltipShow', 'tooltipTether'], $scope.rebuild);
+
+		// Respond to upstream events {{{
+		$scope.$on('bs.tooltip.reposition', ()=> {
+			if ($scope.tether) { // Using Tether - ask it to reposition
+				$scope.tether.position();
+			} else { // Not using tether - destroy and rebuild
+				$scope.rebuild();
+			}
+		});
 		// }}}
 	},
 }));

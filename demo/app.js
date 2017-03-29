@@ -10,15 +10,9 @@ angular.module('app', [
 			position: 'top',
 			html: false,
 			tether: false,
-			show: false,
+			show: undefined,
 			jumpy: false,
 		};
-		$scope.positions = [
-			{id: 'top', text: 'Top'},
-			{id: 'right', text: 'Right'},
-			{id: 'bottom', text: 'Bottom'},
-			{id: 'left', text: 'Left'},
-		];
 
 		// .config.jumpy {{{
 		$scope.jumpTimer;

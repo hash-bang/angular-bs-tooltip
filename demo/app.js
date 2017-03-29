@@ -5,13 +5,11 @@ angular.module('app', [
 		$scope.time;
 		$interval(()=> $scope.time = (new Date).toString(), 1000);
 
-		$scope.showTooltip = true;
-		$scope.toggleShow = ()=> $scope.showTooltip = !$scope.showTooltip;
-
 		$scope.config = {
 			text: 'Hello <strong>World</strong>!',
 			position: 'top',
 			html: false,
+			show: false,
 		};
 		$scope.positions = [
 			{id: 'top', text: 'Top'},

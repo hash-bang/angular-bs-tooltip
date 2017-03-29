@@ -6,14 +6,15 @@ angular.module('angular-bs-tooltip', [])
 		tooltipPosition: '@?',
 		tooltipContainer: '@?',
 		tooltipTrigger: '@?',
-		tooltipHtml: '@?',
+		tooltipHtml: '<',
+		tooltipShow: '<',
 	},
 	controller: function($scope, $element) {
 		$scope.isVisible = false;
 
-		$scope.$watchGroup(['tooltip', 'tooltipPosition', 'tooltipContainer', 'tooltipTrigger', 'tooltipHtml'], ()=> {
+		$scope.$watchGroup(['tooltip', 'tooltipPosition', 'tooltipContainer', 'tooltipTrigger', 'tooltipHtml', 'tooltipShow'], ()=> {
 			var elem = $($element);
-			var isVisible = $scope.isVisible; // Local copy of the tooltip before we destroy it
+			var isVisible = ($scope.tooltipShow !== undefined && $scope.tooltipShow !== null) ? $scope.tooltipShow : $scope.isVisible; // Local copy of the tooltip before we destroy it (or forced with tooltipShow)
 			if (elem.hasClass('ng-tooltip')) elem.tooltip('destroy');
 
 			if (!$scope.tooltip) return; // No tooltip set - don't bother with setup
@@ -25,8 +26,8 @@ angular.module('angular-bs-tooltip', [])
 					title: $scope.tooltip,
 					placement: $scope.tooltipPosition || 'top',
 					container: $scope.tooltipContainer == 'element' ? false : 'body',
-					trigger: $scope.tooltipTrigger || 'hover',
-					html: $scope.tooltipHtml != 'false',
+					trigger: $scope.tooltipShow ? 'manual' : $scope.tooltipTrigger || 'hover',
+					html: !! $scope.tooltipHtml,
 					animation: false,
 				})
 				.addClass('ng-tooltip');

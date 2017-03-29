@@ -61,9 +61,10 @@
 					<div class="col-sm-9">
 						<input ng-model="config.text" type="text" class="form-control"/>
 						<div class="checkbox">
-							<label>
-								<input ng-model="config.html" type="checkbox"> Allow HTML
-							</label>
+							<label><input ng-model="config.html" type="checkbox"> Allow HTML</label>
+						</div>
+						<div class="checkbox">
+							<label><input ng-model="config.show" type="checkbox"> Force show</label>
 						</div>
 					</div>
 				</div>
@@ -77,7 +78,7 @@
 				</div>
 			</div>
 			<div class="col-md-4 text-center">
-				<a class="btn btn-primary" tooltip="{{config.text}}" tooltip-position="{{config.position}}" tooltip-html="{{config.html}}">Button</a>
+				<a class="btn btn-primary" tooltip="{{config.text}}" tooltip-position="{{config.position}}" tooltip-html="config.html" tooltip-show="config.show">Button</a>
 			</div>
 		</div>
 	</div>

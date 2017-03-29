@@ -1,6 +1,6 @@
 {
-  "name": "angular-bs-tooltip",
-  "version": "1.0.0",
+  "name": "@momsfriendlydevco/angular-bs-tooltip",
+  "version": "1.1.0",
   "description": "AngularJS + Bootstrap tooltip support",
   "main": "angular-bs-tooltip.js",
   "scripts": {

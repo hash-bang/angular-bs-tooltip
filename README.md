@@ -47,3 +47,4 @@ Options
 | `tooltip-container` | `string`  | `body`  | The element to attach the tooltip to. Values are: `body`, `element`          |
 | `tooltip-trigger`   | `string`  | `hover` | When to display the tooltip. Values are: `hover`, `focus`, `click`, `manual` |
 | `tooltip-html`      | `boolean` | `false` | Whether to render the contents as HTML. If false, plain text is used         |
+| `tooltip-show`      | `boolean` | `false` | Force the tooltip to display (this overrides `tooltip-trigger` if truthy)    |

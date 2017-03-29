@@ -2,29 +2,36 @@ angular.module('angular-bs-tooltip', [])
 .directive('tooltip', ()=> ({
 	restrict: 'A',
 	scope: {
-		tooltip: '@',
+		tooltip: '@?',
 		tooltipPosition: '@?',
 		tooltipContainer: '@?',
 		tooltipTrigger: '@?',
-		tooltipHtml: '@?'
+		tooltipHtml: '@?',
 	},
-	link: function($scope, elem) {
-		$scope.$watchGroup(['tooltip', 'tooltipPosition', 'tooltipContainer', 'tooltipTrigger'], ()=> {
-			var isVisible = $(elem).siblings('.tooltip').length > 0; // Is the tooltip already shown?
-			if ($(elem).hasClass('ng-tooltip')) $(elem).tooltip('destroy');
+	controller: function($scope, $element) {
+		$scope.isVisible = false;
 
-			$(elem)
+		$scope.$watchGroup(['tooltip', 'tooltipPosition', 'tooltipContainer', 'tooltipTrigger', 'tooltipHtml'], ()=> {
+			var elem = $($element);
+			var isVisible = $scope.isVisible; // Local copy of the tooltip before we destroy it
+			if (elem.hasClass('ng-tooltip')) elem.tooltip('destroy');
+
+			if (!$scope.tooltip) return; // No tooltip set - don't bother with setup
+
+			elem
+				.on('shown.bs.tooltip', ()=> $scope.isVisible = true)
+				.on('hidden.bs.tooltip', ()=> $scope.isVisible = false)
 				.tooltip({
 					title: $scope.tooltip,
 					placement: $scope.tooltipPosition || 'top',
 					container: $scope.tooltipContainer == 'element' ? false : 'body',
 					trigger: $scope.tooltipTrigger || 'hover',
-					html: $scope.tooltipHtml || false,
-					animation: false
+					html: $scope.tooltipHtml != 'false',
+					animation: false,
 				})
 				.addClass('ng-tooltip');
 
-			if (isVisible) $(elem).tooltip('show'); // Reshow the tooltip if we WERE using it before
+			if (isVisible) elem.tooltip('show'); // Reshow the tooltip if we WERE using it before
 		});
 	},
 }));

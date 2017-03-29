@@ -51,4 +51,34 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="container p-t-20">
+		<legend>Static property example</legend>
+		<div class="row">
+			<div class="col-md-8 form-horizontal">
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Text</label>
+					<div class="col-sm-9">
+						<input ng-model="config.text" type="text" class="form-control"/>
+						<div class="checkbox">
+							<label>
+								<input ng-model="config.html" type="checkbox"> Allow HTML
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Text</label>
+					<div class="col-sm-9">
+						<select ng-model="config.position" class="form-control">
+							<option ng-repeat="position in positions track by position.id" value="{{position.id}}">{{position.text}}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 text-center">
+				<a class="btn btn-primary" tooltip="{{config.text}}" tooltip-position="{{config.position}}" tooltip-html="{{config.html}}">Button</a>
+			</div>
+		</div>
+	</div>
 </body>

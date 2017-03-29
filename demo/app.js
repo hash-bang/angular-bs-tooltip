@@ -4,4 +4,19 @@ angular.module('app', [
 	.controller('demoCtrl', function($scope, $interval) {
 		$scope.time;
 		$interval(()=> $scope.time = (new Date).toString(), 1000);
+
+		$scope.showTooltip = true;
+		$scope.toggleShow = ()=> $scope.showTooltip = !$scope.showTooltip;
+
+		$scope.config = {
+			text: 'Hello <strong>World</strong>!',
+			position: 'top',
+			html: false,
+		};
+		$scope.positions = [
+			{id: 'top', text: 'Top'},
+			{id: 'right', text: 'Right'},
+			{id: 'bottom', text: 'Bottom'},
+			{id: 'left', text: 'Left'},
+		];
 	})

@@ -51,7 +51,6 @@ angular.module('angular-bs-tooltip', [])
 				var elem = $($element)
 
 				elem.one('shown.bs.tooltip', ()=> { // Wait until the tooltip is visible then tether to it
-					console.log('Shown!');
 					$scope.tether = new Tether({
 						element: elem.data('bs.tooltip').$tip[0],
 						target: elem[0],

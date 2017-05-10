@@ -58,13 +58,15 @@ angular.module('angular-bs-tooltip', [])
 							$scope.tooltipPosition == 'top' ? 'bottom middle' :
 							$scope.tooltipPosition == 'left' ? 'center right' :
 							$scope.tooltipPosition == 'right' ? 'center left' :
-							'top middle'
+							$scope.tooltipPosition == 'bottom' ? 'top middle' :
+							'bottom middle'
 						,
 						targetAttachment:
 							$scope.tooltipPosition == 'top' ? 'top middle' :
 							$scope.tooltipPosition == 'left' ? 'center left' :
 							$scope.tooltipPosition == 'right' ? 'center right' :
-							'bottom middle'
+							$scope.tooltipPosition == 'bottom' ? 'bottom middle' :
+							'top middle'
 					});
 
 					// If its a number

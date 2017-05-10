@@ -52,13 +52,12 @@ angular.module('angular-bs-tooltip', []).directive('tooltip', function () {
 
 					elem.one('shown.bs.tooltip', function () {
 						// Wait until the tooltip is visible then tether to it
-						console.log('Shown!');
 						$scope.tether = new Tether({
 							element: elem.data('bs.tooltip').$tip[0],
 							target: elem[0],
-							attachment: $scope.tooltipPosition == 'top' ? 'bottom middle' : $scope.tooltipPosition == 'left' ? 'center right' : $scope.tooltipPosition == 'right' ? 'center left' : 'top middle',
+							attachment: $scope.tooltipPosition == 'top' ? 'bottom middle' : $scope.tooltipPosition == 'left' ? 'center right' : $scope.tooltipPosition == 'right' ? 'center left' : $scope.tooltipPosition == 'bottom' ? 'top middle' : 'bottom middle',
 
-							targetAttachment: $scope.tooltipPosition == 'top' ? 'top middle' : $scope.tooltipPosition == 'left' ? 'center left' : $scope.tooltipPosition == 'right' ? 'center right' : 'bottom middle'
+							targetAttachment: $scope.tooltipPosition == 'top' ? 'top middle' : $scope.tooltipPosition == 'left' ? 'center left' : $scope.tooltipPosition == 'right' ? 'center right' : $scope.tooltipPosition == 'bottom' ? 'bottom middle' : 'top middle'
 						});
 
 						// If its a number

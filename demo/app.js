@@ -12,6 +12,7 @@ angular.module('app', [
 			tether: false,
 			show: undefined,
 			jumpy: false,
+			hidey: false,
 		};
 
 		// .config.jumpy {{{
@@ -24,7 +25,16 @@ angular.module('app', [
 				left: (Math.random() * 100) / 2,
 			}), 700);
 		});
-
-		$scope.jumpRefresh = ()=> $scope.$broadcast('bs.tooltip.reposition');
 		// }}}
+
+		// .config.hidey {{{
+		$scope.hideTimer;
+		$scope.$watch('config.hidey', ()=> {
+			if (!$scope.config.hidey) return $interval.cancel($scope.hideTimer);
+
+			$scope.hideTimer = $interval(()=> $('#target').toggle(Math.random() > 0.5), 500);
+		});
+		// }}}
+
+		$scope.manualRefresh = ()=> $scope.$broadcast('bs.tooltip.reposition');
 	})

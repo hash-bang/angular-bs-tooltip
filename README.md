@@ -3,6 +3,9 @@ angular-bs-tooltip
 AngularJS + Bootstrap tooltip support.
 
 
+[DEMO](http://hash-bang.github.io/angular-bs-tooltip/)
+
+
 Installation
 ------------
 

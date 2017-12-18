@@ -39,7 +39,7 @@ gulp.task('serve', ['build'], function() {
 
 
 gulp.task('js', ()=>
-	gulp.src('./src/angular-ui-history.js')
+	gulp.src('./src/angular-bs-tooltip.js')
 		.pipe(plumber({
 			errorHandler: function(err) {
 				gutil.log(gutil.colors.red('ERROR DURING JS BUILD'));
@@ -47,7 +47,7 @@ gulp.task('js', ()=>
 				this.emit('end');
 			},
 		}))
-		.pipe(rename('angular-ui-history.js'))
+		.pipe(rename('angular-bs-tooltip.js'))
 		.pipe(babel({
 			presets: ['es2015'],
 			plugins: ['angularjs-annotate'],
@@ -67,12 +67,8 @@ gulp.task('gh-pages', ['build'], function() {
 		'./demo/app.js',
 		'./demo/index.html',
 		'./demo/history.json',
-		'./demo/style.css',
 		'./dist/**/*',
 		'./node_modules/angular/angular.min.js',
-		'./node_modules/angular-gravatar/build/angular-gravatar.min.js',
-		'./node_modules/angular-relative-date/dist/angular-relative-date.min.js',
-		'./node_modules/@momsfriendlydevco/angular-bs-tooltip/dist/angular-bs-tooltip.min.js',
 		'./node_modules/bootstrap/dist/css/bootstrap.min.css',
 		'./node_modules/bootstrap/dist/js/bootstrap.min.js',
 		'./node_modules/jquery/dist/jquery.min.js',
@@ -80,9 +76,7 @@ gulp.task('gh-pages', ['build'], function() {
 		'./node_modules/font-awesome/fonts/fontawesome-webfont.ttf',
 		'./node_modules/font-awesome/fonts/fontawesome-webfont.woff',
 		'./node_modules/font-awesome/fonts/fontawesome-webfont.woff2',
-		'./node_modules/quill/dist/quill.min.js',
-		'./node_modules/ng-quill/dist/ng-quill.min.js',
-		'./node_modules/quill/dist/quill.snow.css',
+		'./node_modules/tether/dist/js/tether.min.js',
 	], {base: __dirname})
 		.pipe(rename(function(path) {
 			if (path.dirname == 'demo') { // Move all demo files into root

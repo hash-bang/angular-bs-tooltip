@@ -28,7 +28,7 @@ app.get('/app.js', function(req, res) {
 	res.sendFile('app.js', {root: root + '/demo'});
 });
 
-app.get('/angular-bs-tooltip.js', function(req, res) {
+app.get('/dist/angular-bs-tooltip.js', function(req, res) {
 	res.sendFile('angular-bs-tooltip.js', {root: root + '/src'});
 });
 

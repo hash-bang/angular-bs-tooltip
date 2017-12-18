@@ -12,7 +12,7 @@ angular.module('angular-bs-tooltip', []).directive('tooltip', function () {
 			tooltipShow: '<',
 			tooltipTether: '<'
 		},
-		controller: ["$scope", "$element", "$interval", function controller($scope, $element, $interval) {
+		controller: ['$scope', '$element', '$interval', function controller($scope, $element, $interval) {
 			$scope.isVisible = false;
 
 			/**

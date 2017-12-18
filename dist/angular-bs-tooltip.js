@@ -35,7 +35,8 @@ angular.module('angular-bs-tooltip', []).directive('tooltip', function () {
 					container: $scope.tooltipContainer == 'element' ? false : 'body',
 					trigger: $scope.tooltipShow === true || $scope.tooltipShow === false ? 'manual' : $scope.tooltipTrigger || 'hover',
 					html: !!$scope.tooltipHtml,
-					animation: false
+					animation: false,
+					template: '<div class="tooltip ng-tooltip-' + $scope.$id + '" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
 				}).addClass('ng-tooltip');
 
 				if ($scope.tooltipShow === true || $scope.tooltipShow !== false && isVisible) elem.tooltip('show'); // Reshow the tooltip if we WERE using it before AND we dont have a forced hide
@@ -84,6 +85,14 @@ angular.module('angular-bs-tooltip', []).directive('tooltip', function () {
 					// Not using tether - destroy and rebuild
 					$scope.rebuild();
 				}
+			});
+			// }}}
+
+			// Respond to destruction {{{
+			$scope.$on('$destroy', function () {
+				if ($scope.tooltipTether && $scope.tether) $scope.tether.destroy();
+				angular.element('.ng-tooltip-' + $scope.$id).remove();
+				$($element).tooltip('destroy');
 			});
 			// }}}
 		}]

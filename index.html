@@ -14,6 +14,7 @@
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 
 	<!-- Bootstrap -->
+	<script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
 	<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
@@ -25,6 +26,7 @@
 
 	<!-- Demo setup -->
 	<script src="app.js"></script>
+	<link href="app.css" rel="stylesheet" type="text/css"/>
 
 	<!-- Angular-BS-Tooltip module -->
 	<script src="dist/angular-bs-tooltip.js"></script>
@@ -42,77 +44,86 @@
 <body ng-app="app" ng-controller="demoCtrl">
 	<a href="https://github.com/hash-bang/angular-bs-tooltip"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
 	<div class="container p-t-20">
-		<legend>Simple examples</legend>
-		<div class="row">
-			<div class="col-sm-3 text-center">
-				<a class="btn btn-primary" tooltip="The time is {{time}}" tooltip-position="top">Top</a>
-			</div>
-			<div class="col-sm-3 text-center">
-				<a class="btn btn-primary" tooltip="The time is {{time}}" tooltip-position="right">Right</a>
-			</div>
-			<div class="col-sm-3 text-center">
-				<a class="btn btn-primary" tooltip="The time is {{time}}" tooltip-position="bottom">Bottom</a>
-			</div>
-			<div class="col-sm-3 text-center">
-				<a class="btn btn-primary" tooltip="The time is {{time}}" tooltip-position="right">Right</a>
+		<div class="card">
+			<div class="card-header">Simple examples</div>
+			<div class="card-body row">
+				<div class="col-sm-3 text-center">
+					<a class="btn btn-primary" tooltip="The time is {{time}}" tooltip-position="top">Top</a>
+				</div>
+				<div class="col-sm-3 text-center">
+					<a class="btn btn-primary" tooltip="The time is {{time}}" tooltip-position="right">Right</a>
+				</div>
+				<div class="col-sm-3 text-center">
+					<a class="btn btn-primary" tooltip="The time is {{time}}" tooltip-position="bottom">Bottom</a>
+				</div>
+				<div class="col-sm-3 text-center">
+					<a class="btn btn-primary" tooltip="The time is {{time}}" tooltip-position="right">Right</a>
+				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="container p-t-20">
-		<legend>Static property example</legend>
-		<div class="row">
-			<div class="col-md-8 form-horizontal">
-				<div class="form-group">
-					<label class="col-sm-3 control-label">Text</label>
-					<div class="col-sm-9">
-						<input ng-model="config.text" type="text" class="form-control"/>
-						<div class="checkbox">
-							<label><input ng-model="config.html" type="checkbox"> Allow HTML</label>
+		<div class="card">
+			<div class="card-header">Static property example</div>
+				<div class="card-body row">
+					<div class="col-md-6 form-horizontal">
+						<div class="form-group">
+							<label class="col-sm-4 control-label">Text</label>
+							<div class="col-sm-8">
+								<input ng-model="config.text" type="text" class="form-control"/>
+								<div class="checkbox">
+									<label><input ng-model="config.html" type="checkbox"> Allow HTML</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 control-label">Text</label>
+							<div class="col-sm-8">
+								<select ng-model="config.position" class="form-control">
+									<option ng-value="'top'">Top</option>
+									<option ng-value="'right'">Right</option>
+									<option ng-value="'bottom'">Bottom</option>
+									<option ng-value="'left'">Left</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 control-label">Visibility</label>
+							<div class="col-sm-8">
+								<select ng-model="config.show" class="form-control">
+									<option ng-value="undefined">Default</option>
+									<option ng-value="true">Force Show</option>
+									<option ng-value="false">Force Hide</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 control-label">Tethering</label>
+							<div class="col-sm-8">
+								<div class="checkbox">
+									<label><input ng-model="config.tether" type="checkbox"> Tether</label>
+								</div>
+								<div class="checkbox">
+									<label><input ng-model="config.jumpy" type="checkbox"> Jump around</label>
+								</div>
+								<div class="checkbox">
+									<label><input ng-model="config.hidey" type="checkbox"> Randomly hide</label>
+								</div>
+								<div class="checkbox">
+									<a ng-click="manualRefresh()" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i> Manual reposition</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 text-center">
+						<div class="card" style="height: 400px; width: 400px">
+							<div class="card-body">
+								<a id="target" style="position: relative" class="btn btn-primary" tooltip="{{config.text}}" tooltip-position="{{config.position}}" tooltip-html="config.html" tooltip-show="config.show" tooltip-tether="config.tether">Button</a>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label">Text</label>
-					<div class="col-sm-9">
-						<select ng-model="config.position" class="form-control">
-							<option ng-value="'top'">Top</option>
-							<option ng-value="'right'">Right</option>
-							<option ng-value="'bottom'">Bottom</option>
-							<option ng-value="'left'">Left</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label">Visibility</label>
-					<div class="col-sm-9">
-						<select ng-model="config.show" class="form-control">
-							<option ng-value="undefined">Default</option>
-							<option ng-value="true">Force Show</option>
-							<option ng-value="false">Force Hide</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label">Tethering</label>
-					<div class="col-sm-9">
-						<div class="checkbox">
-							<label><input ng-model="config.tether" type="checkbox"> Tether</label>
-						</div>
-						<div class="checkbox">
-							<label><input ng-model="config.jumpy" type="checkbox"> Jump around</label>
-						</div>
-						<div class="checkbox">
-							<label><input ng-model="config.hidey" type="checkbox"> Randomly hide</label>
-						</div>
-						<div class="checkbox">
-							<a ng-click="manualRefresh()" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i> Manual reposition</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 text-center well" style="height: 200px">
-				<a id="target" style="position: relative" class="btn btn-primary" tooltip="{{config.text}}" tooltip-position="{{config.position}}" tooltip-html="config.html" tooltip-show="config.show" tooltip-tether="config.tether">Button</a>
 			</div>
 		</div>
 	</div>

@@ -1,0 +1,4 @@
+/* Silly work around to recolor buttons that don't have a href / tabindex in BS4 */
+.btn.btn.btn.btn.btn.btn {
+	color: #fff;
+}

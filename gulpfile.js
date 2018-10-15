@@ -44,7 +44,7 @@ gulp.task('js', ()=>
 		}))
 		.pipe(rename('angular-bs-tooltip.js'))
 		.pipe(babel({
-			presets: ['es2015'],
+			presets: ['@babel/env'],
 			plugins: ['angularjs-annotate'],
 		}))
 		.pipe(gulp.dest('./dist'))

@@ -30,11 +30,6 @@ gulp.task('serve', ['build'], function() {
 		console.log('Rebuild client-side JS files...');
 		gulp.start('js');
 	});
-
-	watch(['demo/**/*.css', 'src/**/*.css'], function() {
-		console.log('Rebuild client-side CSS files...');
-		gulp.start('css');
-	});
 });
 
 
@@ -64,6 +59,7 @@ gulp.task('gh-pages', ['build'], function() {
 	return gulp.src([
 		'./LICENSE',
 		'./demo/_config.yml',
+		'./demo/app.css',
 		'./demo/app.js',
 		'./demo/index.html',
 		'./demo/history.json',
@@ -76,7 +72,7 @@ gulp.task('gh-pages', ['build'], function() {
 		'./node_modules/font-awesome/fonts/fontawesome-webfont.ttf',
 		'./node_modules/font-awesome/fonts/fontawesome-webfont.woff',
 		'./node_modules/font-awesome/fonts/fontawesome-webfont.woff2',
-		'./node_modules/tether/dist/js/tether.min.js',
+		'./node_modules/popper.js/dist/umd/popper.min.js',
 	], {base: __dirname})
 		.pipe(rename(function(path) {
 			if (path.dirname == 'demo') { // Move all demo files into root

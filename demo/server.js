@@ -20,17 +20,10 @@ var app = express();
 app.use('/node_modules', express.static(root + '/node_modules'));
 app.use('/views', express.static(root + '/demo/views'));
 
-app.get('/', function(req, res) {
-	res.sendFile('index.html', {root: __dirname});
-});
-
-app.get('/app.js', function(req, res) {
-	res.sendFile('app.js', {root: root + '/demo'});
-});
-
-app.get('/dist/angular-bs-tooltip.js', function(req, res) {
-	res.sendFile('angular-bs-tooltip.js', {root: root + '/src'});
-});
+app.get('/', (req, res) => res.sendFile('index.html', {root: __dirname}));
+app.get('/app.css', (req, res) => res.sendFile('app.css', {root: root + '/demo'}));
+app.get('/app.js', (req, res) => res.sendFile('app.js', {root: root + '/demo'}));
+app.get('/dist/angular-bs-tooltip.js', (req, res) => res.sendFile('angular-bs-tooltip.js', {root: root + '/src'}));
 
 app.use(function(err, req, res, next){
 	console.error(err.stack);

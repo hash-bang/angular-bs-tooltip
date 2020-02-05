@@ -119,6 +119,7 @@ angular.module('angular-bs-tooltip', []).directive('tooltip', function () {
       // Respond to destruction {{{
 
       $scope.$on('$destroy', function () {
+        var elem = $($element);
         if ($scope.tooltipTether && $scope.tether) $scope.tether.destroy();
         angular.element(".ng-tooltip-".concat($scope.$id)).remove();
 

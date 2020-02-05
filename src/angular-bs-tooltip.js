@@ -134,6 +134,7 @@ angular.module('angular-bs-tooltip', [])
 
 		// Respond to destruction {{{
 		$scope.$on('$destroy', function() {
+			var elem = $($element);
 			if ($scope.tooltipTether && $scope.tether) $scope.tether.destroy();
 			angular.element(`.ng-tooltip-${$scope.$id}`).remove();
 			if ($scope.isBS3) {

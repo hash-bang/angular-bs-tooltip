@@ -1,8 +1,9 @@
 {
   "name": "@momsfriendlydevco/angular-bs-tooltip",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "AngularJS + Bootstrap tooltip support",
-  "main": "angular-bs-tooltip.js",
+  "main": "dist/angular-bs-tooltip.js",
+  "browser": "dist/angular-bs-tooltip.js",
   "scripts": {
     "serve": "node demo/server.js",
     "publish": "gulp build"
